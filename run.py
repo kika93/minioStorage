@@ -6,7 +6,7 @@ from StorageService import *
 app = Flask(__name__)
 
 
-FILE_UPLOADS = '/files'
+FILE_UPLOADS = '/tmp'
 
 
 @app.route('/')
