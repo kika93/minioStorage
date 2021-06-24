@@ -1,7 +1,7 @@
 from minio import Minio
 
 
-FILE_UPLOADS = '/files'
+FILE_UPLOADS = '/tmp'
 LOCAL_DOWNLOAD_PATH = '/download/'
 
 client = Minio(
