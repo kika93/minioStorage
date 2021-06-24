@@ -1,12 +1,9 @@
-import os
-
 from flask import Flask, request
 from StorageService import *
 
 app = Flask(__name__)
 
-
-FILE_UPLOADS = '/tmp'
+temp_folder = file_upload_path
 
 
 @app.route('/')
@@ -35,27 +32,16 @@ def get_content(bucket):
     return str(content_names)
 
 
-# @app.route('/upload_file', methods=['POST'])
-# def upload():
-#     """Uploads any type of file onto the bucket
-#     :return: returns the filename"""
-#
-#     file = request.files['file']
-#     file.save(os.path.join(FILE_UPLOADS, file.filename))
-#
-#     upload_file(file)
-#     return str(file.filename)
-
-
 @app.route('/upload_file/<bucket>', methods=['POST'])
 def upload1(bucket):
     """Uploads any type of file onto the bucket
     :return: returns the filename"""
 
     dir_path = request.args.get('dir_path')
+    print(temp_folder)
 
     file = request.files['file']
-    file.save(os.path.join(FILE_UPLOADS, file.filename))
+    file.save(os.path.join(temp_folder, file.filename))
 
     upload_file(file, bucket, dir_path)
     return str(file.filename)

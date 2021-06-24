@@ -1,14 +1,12 @@
 from minio import Minio
+from config import *
 
-
-FILE_UPLOADS = '/tmp'
-LOCAL_DOWNLOAD_PATH = '/download/'
 
 client = Minio(
 
-    endpoint='minio:9000/',
-    access_key='minio',
-    secret_key='minio123',
+    endpoint=minio_host,
+    access_key=minio_access_key,
+    secret_key=minio_secret_key,
     secure=False
 )
 
@@ -21,7 +19,7 @@ def upload_file(file, bucket, dir_path):
     else:
         print('bucket already exists')
     client.fput_object(bucket, dir_path + '/' + file.filename,
-                       file_path=FILE_UPLOADS + '/' + file.filename),
+                       file_path=file_upload_path + '/' + file.filename),
     print(
         'the file was uploaded onto bucket:{0}'.format(bucket)
     )
@@ -44,7 +42,7 @@ def list_files(bucket_name):
 def read(bucket_name, object_path, file_path):
 
     object_name = object_path + '/' + file_path
-    file = client.fget_object(bucket_name, str(object_name), LOCAL_DOWNLOAD_PATH + file_path)
+    file = client.fget_object(bucket_name, str(object_name), local_download_path + file_path)
 
     return file
 

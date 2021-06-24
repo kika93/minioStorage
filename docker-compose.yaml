@@ -26,8 +26,8 @@ services:
         - flaskapi
 
       environment:
-        MINIO_ACCESS_KEY: minio
-        MINIO_SECRET_KEY: minio123
+        - MINIO_ACCESS_KEY=minio
+        - MINIO_SECRET_KEY=minio123
       command: server  /data
 
 networks:
